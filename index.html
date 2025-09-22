@@ -112,30 +112,47 @@
 
 
     <!-- ABSTRACT -->
-    <section id="abstract" class="card">
-      <h2>Abstract</h2>
-      <p>
-        Robots need task planning methods to generate action sequences for complex tasks. Recent work on adversarial attacks has revealed significant vulnerabilities in existing robot 
-        task planners, especially those built on foundation models. In this paper, we aim to address these security challenges by introducing PROTEA, an LLM-as-a-Judge defense mechanism,
-        to evaluate the security of task plans. PROTEA is developed to address the dimensionality and history challenges in plan safety assessment. We used different LLMs to implement
-        multiple versions of PROTEA for comparison purposes. For systemic evaluations, we created a dataset containing both benign and malicious task plans, where the harmful behaviors
-        were injected at varying levels of stealthiness. Our results provide actionable insights for robotic system practitioners seeking to enhance robustness and security of their task planning systems</p>
-    </section>
+    <div style="margin-bottom: 40px;">
+      <section id="abstract" class="card">
+        <h2>Abstract</h2>
+        <p>
+          Robots need task planning methods to generate action sequences for complex tasks. Recent work on adversarial attacks has revealed significant vulnerabilities in existing robot 
+          task planners, especially those built on foundation models. In this paper, we aim to address these security challenges by introducing PROTEA, an LLM-as-a-Judge defense mechanism,
+          to evaluate the security of task plans. PROTEA is developed to address the dimensionality and history challenges in plan safety assessment. We used different LLMs to implement
+          multiple versions of PROTEA for comparison purposes. For systemic evaluations, we created a dataset containing both benign and malicious task plans, where the harmful behaviors
+          were injected at varying levels of stealthiness. Our results provide actionable insights for robotic system practitioners seeking to enhance robustness and security of their task planning systems</p>
+      </section>
+    </div>
+
+    <!-- Overview Figure -->
+    <div style="margin-bottom: 40px;">
+        <section class="card">
+          <h2>Overview Figure of PROTEA</h2>
+          <p>
+            <a href="assets/figures/overview.pdf" target="_blank" rel="noopener">
+            </a>
+          </p>
+        </section>
+    </div>
+
 
     <!-- DEMO VIDEO -->
-    <section id="demo" class="card">
-      <h2>Project Demo</h2>
-      <div class="video-card">
-        <!-- Preferred: host MP4 in this repo under assets/demo/. Keep H.264/AAC, 1080p. -->
-        <video controls preload="metadata" poster="assets/demo/demo-poster.jpg">
-          <source src="assets/demo/protea_demo.mp4" type="video/mp4" />
-          <!-- Optional WebM for smaller size
-          <source src="assets/demo/protea_demo.webm" type="video/webm" />
-          -->
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </section>
+    <div style="margin-bottom: 40px;">
+      <section id="demo" class="card">
+        <h2>Project Demo</h2>
+        <div class="video-card">
+          <!-- Preferred: host MP4 in this repo under assets/demo/. Keep H.264/AAC, 1080p. -->
+          <video controls preload="metadata" poster="assets/demo/demo-poster.jpg">
+            <source src="assets/demo/protea_demo.mp4" type="video/mp4" />
+            <!-- Optional WebM for smaller size
+            <source src="assets/demo/protea_demo.webm" type="video/webm" />
+            -->
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+    </div>
+  
 
 
     <!-- DATASET BLURB + KPIs -->
@@ -200,7 +217,7 @@
         </div>
       </div>
     </section>
-
+<!-- 
     <!-- CITATION (optional) -->
     <section class="card">
       <h2>Citation</h2>
@@ -227,7 +244,7 @@
         <p>For questions about the paper, code, or dataset, please email <a href="mailto:you@example.com">you@example.com</a>.</p>
       </div>
     </section>
-
+-->
     <footer class="container">
       <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px">
         <span>© <span id="y"></span> PROTEA Project</span>
