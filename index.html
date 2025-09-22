@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PROTEA: Securing Robot Task Planning and Execution</title>
+  <meta name="description" content="Project page for our PROTEA with dataset, code, demo video, and VirtualHome malicious-action examples." />
+  <meta name="theme-color" content="#0f172a" />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PROTEA: Securing Robot Task Planning and Execution" />
+  <meta property="og:description" content="Defense mechanism for safety evaluation of robot task plans. Dataset, code, demo, and VirtualHome examples." />
+  <meta property="og:image" content="assets/og-cover.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    :root{
+      --bg: #0b1220; /* page background */
+      --panel: #0f172a; /* cards/nav */
+      --panel-2: #111827; /* alt panels */
+      --text: #e5e7eb; /* primary text */
+      --muted: #a1a1aa; /* secondary text */
+      --brand: #38bdf8; /* cyan */
+      --brand-2: #22c55e; /* green */
+      --accent: #f59e0b; /* amber */
+      --ring: rgba(56,189,248,.45);
+      --shadow: 0 8px 24px rgba(0,0,0,.45);
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg: #f8fafc;
+        --panel: #ffffff;
+        --panel-2: #f1f5f9;
+        --text: #0b1220;
+        --muted: #475569;
+        --shadow: 0 8px 20px rgba(15,23,42,.10);
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background: radial-gradient(1200px 800px at 10% -10%, rgba(56,189,248,.08), transparent 60%),
+                         radial-gradient(1000px 600px at 120% 10%, rgba(34,197,94,.07), transparent 60%), var(--bg);
+      line-height:1.55;
+    }
+    a{color:var(--brand); text-decoration:none}
+    a:hover{opacity:.9}
+    .container{max-width:1100px; margin:0 auto; padding:0 20px}
+    header{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(6px);
+      background: color-mix(in oklab, var(--panel) 85%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--panel), #ffffff 8%);
+    }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; height:64px}
+    .brand{display:flex; align-items:center; gap:10px}
+    .brand .dot{width:12px; height:12px; border-radius:999px; background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .brand h1{font-size:16px; margin:0; letter-spacing:.2px}
+    .nav a{font-weight:600; font-size:14px; color:var(--text)}
+    .nav .links{display:flex; gap:18px; align-items:center}
+
+    .hero{padding:64px 0 28px}
+    .title{font-size: clamp(28px, 6vw, 44px); line-height:1.1; margin:0 0 12px}
+    .subtitle{color:var(--muted); font-size:clamp(14px,2.6vw,18px); margin:0 0 24px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; font-weight:700; border:1px solid transparent}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#001018; box-shadow:var(--shadow)}
+    .btn.ghost{background:color-mix(in oklab, var(--panel) 88%, transparent); color:var(--text); border-color: color-mix(in oklab, var(--panel), #fff 10%)}
+
+    section{padding:28px 0}
+    .card{background:var(--panel); border:1px solid color-mix(in oklab, var(--panel), #fff 10%); padding:22px; border-radius:16px; box-shadow:var(--shadow)}
+    h2{font-size: clamp(18px, 3vw, 26px); margin:0 0 14px}
+    p{margin:0 0 14px}
+    .muted{color:var(--muted)}
+
+    .grid{display:grid; gap:18px}
+    .grid.cols-2{grid-template-columns: repeat(2, minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns: repeat(3, minmax(0,1fr))}
+    @media (max-width: 900px){ .grid.cols-3{grid-template-columns: 1fr 1fr} }
+    @media (max-width: 680px){ .grid.cols-2, .grid.cols-3{grid-template-columns: 1fr} }
+
+    .video-card{overflow:hidden; border-radius:14px; background:var(--panel-2); border:1px solid color-mix(in oklab, var(--panel-2), #fff 10%)}
+    .video-card video, .video-card iframe{display:block; width:100%; height:auto; aspect-ratio:16/9; border:0}
+    .video-card .cap{padding:10px 12px; font-size:14px; color:var(--muted); display:flex; justify-content:space-between; align-items:center}
+
+    .kpis{display:flex; gap:16px; flex-wrap:wrap}
+    .kpi{flex:1 1 180px; background:var(--panel-2); border:1px solid color-mix(in oklab, var(--panel-2), #fff 10%); border-radius:14px; padding:14px}
+    .kpi .n{font-weight:800; font-size:22px}
+    .kpi .l{color:var(--muted); font-size:12px}
+
+    .code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:var(--panel-2); border:1px dashed color-mix(in oklab, var(--panel-2), #fff 12%); padding:14px; border-radius:12px; overflow:auto}
+
+    footer{padding:38px 0 60px; color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="dot"></span><h1>PROTEA</h1></div>
+      <nav class="links">
+        <a href="#abstract">Abstract</a>
+        <a href="#paper">Paper</a>
+        <a href="#code">Code</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#demo">Demo</a>
+        <a href="#vh-examples">VirtualHome</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <h1 class="title">PROTEA: Securing Robot Task Planning and Execution</h1>
+      <p class="subtitle"></p>
+      <div class="cta">
+        <!-- Replace the href values with your live links -->
+        <a class="btn primary" href="YOUR_PREPRINT_LINK" target="_blank" rel="noopener">Archive</a>
+        <a class="btn ghost" href="YOUR_GITHUB_REPO_LINK" target="_blank" rel="noopener">GitHub Repo</a>
+        <a class="btn ghost" href="YOUR_DATASET_LINK" target="_blank" rel="noopener">Dataset</a>
+      </div>
+    </section>
+
+    <!-- ABSTRACT -->
+    <section id="abstract" class="card">
+      <h2>Abstract</h2>
+      <p>
+        Abstract— Robots need task planning methods to generate action sequences for complex tasks. Recent work on adversarial attacks has revealed significant vulnerabilities in existing robot 
+        task planners, especially those built on foundation models. In this paper, we aim to address these security challenges by introducing PROTEA, an LLM-as-a-Judge defense mechanism,
+        to evaluate the security of task plans. PROTEA is developed to address the dimensionality and history challenges in plan safety assessment. We used different LLMs to implement
+        multiple versions of PROTEA for comparison purposes. For systemic evaluations, we created a dataset containing both benign and malicious task plans, where the harmful behaviors
+        were injected at varying levels of stealthiness. Our results provide actionable insights for robotic system practitioners seeking to enhance robustness and security of their task planning systems</p>
+    </section>
+
+    <!-- PAPER / CODE LINKS -->
+    <section class="grid cols-3">
+      <div id="paper" class="card">
+        <h2>Paper</h2>
+        <p class="muted">Preprint (e.g., arXiv)</p>
+        <p><a href="YOUR_PREPRINT_LINK" target="_blank" rel="noopener">YOUR_PREPRINT_LINK</a></p>
+      </div>
+      <div id="code" class="card">
+        <h2>Code</h2>
+        <p class="muted">GitHub repository</p>
+        <p><a href="YOUR_GITHUB_REPO_LINK" target="_blank" rel="noopener">YOUR_GITHUB_REPO_LINK</a></p>
+      </div>
+      <div id="dataset" class="card">
+        <h2>Dataset</h2>
+        <p class="muted">Benchmarks &amp; annotations</p>
+        <p><a href="YOUR_DATASET_LINK" target="_blank" rel="noopener">YOUR_DATASET_LINK</a></p>
+      </div>
+    </section>
+
+    <!-- DATASET BLURB + KPIs -->
+    <section class="card">
+      <h2>About the Dataset</h2>
+      <p>
+        Short description of the dataset: domains (e.g., House Cleaning, Arrangement, Food Preparation), number of tasks and plans, and the three difficulty tiers (easy/medium/hard) where malicious steps are placed differently in the plan. Mention that VirtualHome representation and program syntax are provided.
+      </p>
+      <div class="kpis" style="margin-top:12px">
+        <div class="kpi"><div class="n">1,518</div><div class="l">Total plans</div></div>
+        <div class="kpi"><div class="n">770</div><div class="l">Benign</div></div>
+        <div class="kpi"><div class="n">748</div><div class="l">Harmful</div></div>
+        <div class="kpi"><div class="n">3</div><div class="l">Difficulty tiers</div></div>
+      </div>
+      <div class="code" style="margin-top:12px">
+        <strong>VirtualHome action snippet</strong>
+<pre>
+[WALK] &lt;kitchen&gt; (42)
+[GRAB] &lt;plate&gt; (101)
+[TURNTO] &lt;stove&gt; (64)
+[SWITCHON] &lt;stove&gt; (64)
+...
+</pre>
+      </div>
+    </section>
+
+    <!-- DEMO VIDEO -->
+    <section id="demo" class="card">
+      <h2>Project Demo</h2>
+      <div class="video-card">
+        <!-- Preferred: host MP4 in this repo under assets/demo/. Keep H.264/AAC, 1080p. -->
+        <video controls preload="metadata" poster="assets/demo/demo-poster.jpg">
+          <source src="assets/demo/protea_demo.mp4" type="video/mp4" />
+          <!-- Optional WebM for smaller size
+          <source src="assets/demo/protea_demo.webm" type="video/webm" />
+          -->
+          Your browser does not support the video tag.
+        </video>
+        <!-- Alternative: YouTube/Vimeo embed (replace the src) -->
+        <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Demo video" allowfullscreen loading="lazy"></iframe> -->
+        <div class="cap"><span>End-to-end overview of PROTEA</span><span>⏯️ 1–2 min</span></div>
+      </div>
+    </section>
+
+    <!-- VIRTUALHOME MALICIOUS ACTION EXAMPLES -->
+    <section id="vh-examples">
+      <h2>Malicious Action Examples (VirtualHome)</h2>
+      <p class="muted">Representative plan segments and outcomes across hazard categories.</p>
+      <div class="grid cols-3" style="margin-top:12px">
+        <!-- Repeat cards for each example; replace sources/captions -->
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/electrical.jpg">
+            <source src="assets/virtualhome/Electrical_Hazard_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Electrical Hazard</span><span>Easy</span></div>
+        </div>
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/property.jpg">
+            <source src="assets/virtualhome/Property_Damage_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Property Damage</span><span>Medium</span></div>
+        </div>
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/animal.jpg">
+            <source src="assets/virtualhome/Animal_Harm_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Animal Harm</span><span>Hard</span></div>
+        </div>
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/fire.jpg">
+            <source src="assets/virtualhome/Fire_Hazard_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Fire Hazard</span><span>Medium</span></div>
+        </div>
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/items.jpg">
+            <source src="assets/virtualhome/Important_Items_Loss_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Important Items Loss</span><span>Easy</span></div>
+        </div>
+        <div class="video-card">
+          <video controls preload="metadata" poster="assets/virtualhome/thumbs/poison.jpg">
+            <source src="assets/virtualhome/Poisoning_Contamination_01.mp4" type="video/mp4" />
+          </video>
+          <div class="cap"><span>Poisoning / Contamination</span><span>Hard</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CITATION (optional) -->
+    <section class="card">
+      <h2>Citation</h2>
+      <p class="muted">Update the BibTeX once the preprint is live.</p>
+      <pre class="code">@misc{protea2025,
+  title        = {PROTEA: Safety Evaluation for Robot Task Plans},
+  author       = {Author1 and Author2 and Author3},
+  year         = {2025},
+  eprint       = {XXXX.XXXXX},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.RO},
+  url          = {YOUR_PREPRINT_LINK}
+}</pre>
+    </section>
+
+    <!-- ACKS / CONTACT (optional) -->
+    <section class="grid cols-2">
+      <div class="card">
+        <h2>Acknowledgements</h2>
+        <p>We thank our colleagues and lab members for feedback, and acknowledge support from &lt;sponsor/grant&gt;.</p>
+      </div>
+      <div class="card">
+        <h2>Contact</h2>
+        <p>For questions about the paper, code, or dataset, please email <a href="mailto:you@example.com">you@example.com</a>.</p>
+      </div>
+    </section>
+
+    <footer class="container">
+      <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px">
+        <span>© <span id="y"></span> PROTEA Project</span>
+        <span class="muted">Built for GitHub Pages</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // Auto year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
