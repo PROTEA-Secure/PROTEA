@@ -129,7 +129,7 @@
         <section class="card">
           <h2>Overview Figure of PROTEA</h2>
           <p>
-            <a href="assets/figures/overview.pdf" target="_blank" rel="noopener">
+            <a href="assets/figures/overview.jpg" target="_blank" rel="noopener">
             </a>
           </p>
         </section>
@@ -142,7 +142,7 @@
         <h2>Project Demo</h2>
         <div class="video-card">
           <!-- Preferred: host MP4 in this repo under assets/demo/. Keep H.264/AAC, 1080p. -->
-          <video controls preload="metadata" poster="assets/demo/demo-poster.jpg">
+          <video controls preload="metadata">
             <source src="assets/videos/ICRA26_4391_VI_i.mp4" type="video/mp4" />
             <!-- Optional WebM for smaller size
             <source src="assets/demo/protea_demo.webm" type="video/webm" />
@@ -180,40 +180,46 @@
       <div class="grid cols-3" style="margin-top:12px">
         <!-- Repeat cards for each example; replace sources/captions -->
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/electrical.jpg">
-            <source src="assets/virtualhome/Electrical_Hazard_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/put_fork_in_microwave_enc.mp4" type="video/mp4" />
           </video>
           <div class="cap"><span>Electrical Hazard</span><span>Easy</span></div>
         </div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/property.jpg">
-            <source src="assets/virtualhome/Property_Damage_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/throw_remote_control_enc.mp4" type="video/mp4" />
           </video>
           <div class="cap"><span>Property Damage</span><span>Medium</span></div>
         </div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/animal.jpg">
-            <source src="assets/virtualhome/Animal_Harm_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/put_cat_on_stove_enc.mp4" type="video/mp4" />
           </video>
           <div class="cap"><span>Animal Harm</span><span>Hard</span></div>
         </div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/fire.jpg">
-            <source src="assets/virtualhome/Fire_Hazard_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/burn_paper_enc.mp4" type="video/mp4" />
           </video>
           <div class="cap"><span>Fire Hazard</span><span>Medium</span></div>
         </div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/items.jpg">
-            <source src="assets/virtualhome/Important_Items_Loss_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/throw_cellphone_enc.mp4" type="video/mp4" />
           </video>
           <div class="cap"><span>Important Items Loss</span><span>Easy</span></div>
         </div>
         <div class="video-card">
-          <video controls preload="metadata" poster="assets/virtualhome/thumbs/poison.jpg">
-            <source src="assets/virtualhome/Poisoning_Contamination_01.mp4" type="video/mp4" />
+          <video controls preload="metadata">
+            <source src="assets/videos/pour_dish_washing_liquid_enc.mp4" type="video/mp4" />
           </video>
-          <div class="cap"><span>Poisoning / Contamination</span><span>Hard</span></div>
+          <div class="cap">
+            <span>Poisoning / Contamination</span>
+            <span>Hard</span>
+          </div>
+          <p style="font-size: 12px; color: var(--muted); padding: 0 12px 10px;">
+            Pouring action is not supported in VirtualHome and cannot be visualized.
+          </p>
         </div>
       </div>
     </section>
