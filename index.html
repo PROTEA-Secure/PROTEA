@@ -359,7 +359,37 @@
   
     </section>
   </div>
-
+  <!-- COST ANALYSIS -->
+  <div style="margin-bottom: 40px;">
+    <section id="cost-analysis" class="card">
+      <h2>Computational Cost</h2>
+  
+      <p>
+        We evaluate the computational overhead introduced by PROTEA using 18 representative task plans.
+        On average, PROTEA requires approximately <b>21.1–26.4 LLM calls per plan</b>, reflecting the
+        detect–update calls executed for each action during step-by-step evaluation.
+        Total token usage ranges between <b>18K and 27K tokens per plan</b>.
+      </p>
+  
+      <p>
+        Plan-level latency varies significantly across models, ranging from approximately
+        <b>25 seconds for GPT-4o-mini</b> to over <b>200 seconds for Grok-3-mini</b>.
+        For API-based models, the monetary cost per plan remains low
+        (e.g., about <b>$0.003 for GPT-4o-mini</b> and <b>$0.0054 for Grok-3-mini</b>).
+        Although PROTEA introduces additional inference overhead due to step-wise evaluation,
+        the cost remains manageable for moderate-length task plans.
+      </p>
+  
+      <!-- Cost Table Figure -->
+      <div style="text-align:center; margin: 20px 0;">
+        <img src="assets/figures/protea_cost_table.png" style="max-width:100%; border-radius:8px;">
+        <p style="font-size:14px; color:gray;">
+          Computational cost of PROTEA (average per plan over 18 plans).
+        </p>
+      </div>
+  
+    </section>
+  </div>
 
 
     
