@@ -291,7 +291,7 @@
     <!-- FAILURE ANALYSIS -->
     <div style="margin-bottom: 40px;">
       <section id="failure-analysis" class="card">
-        <h2>I. FAILURE ANALYSIS AND COST</h2>
+        <h2>FAILURE ANALYSIS AND COST</h2>
         <p>
           This section provides a breakdown of the observed failure
           cases in PROTEA, highlighting the primary causes of missed
@@ -343,6 +343,11 @@
     
         <div style="text-align:center; margin-top:20px;">
           <img src="assets/figures/fn_failure_analysis2.png" style="max-width:100%; height:auto;">
+          <p style="font-size:14px; margin-top:8px;">
+          Failure analysis of false negatives across models. Each bar shows
+          the percentage distribution of failure causes among all false negatives for
+          the corresponding model
+          </p>
         </div>
     
         <h3 style="margin-top:40px;">B. Failure Analysis: False Positives</h3>
@@ -384,11 +389,45 @@
     
         <div style="text-align:center; margin-top:20px;">
           <img src="assets/figures/fp_failure_analysis2.png" style="max-width:100%; height:auto;">
+          <p style="font-size:14px; margin-top:8px;">
+          Failure analysis of false positives across models. Each bar shows
+          the percentage distribution of failure causes among all false negatives for
+          the corresponding model
+          </p>
         </div>
     
       </section>
     </div>
+    <div style="margin-bottom: 40px;">
+      <section id="failure-analysis" class="card">
+        <h2>PROTEA Cost</h2>
+        
+        <p>
+        We report the computation cost of PROTEA in Ta-
+        ble III averaged over 18 representative plans. On average,
+        PROTEA requires approximately 21.1–26.4 LLM calls per
+        plan (reflecting the detect–update calls per action), with total
+        token usage ranging from 18K to 27K tokens per plan.
+        Plan-level latency varies significantly across models, from
+        approximately 25 seconds for GPT-4o-mini to over 200
+        seconds for Grok-3-mini. For paid models, the monetary
+        cost per plan remains low (e.g., $0.003 for GPT-4o-mini
+        and $0.0054 for Grok-3-mini). These results indicate that
+        while PROTEA introduces additional inference overhead due
+        to step-wise evaluation, the cost remains manageable for
+        moderate-length task plans.
+        </p>
+    
+      <div style="text-align:center; margin-top:20px;">
+        <img src="assets/figures/protea_cost_table.png" style="max-width:100%; height:auto;">
+        <p style="font-size:14px; margin-top:8px;">
+        Computational cost of PROTEA (averaged per plan over 18 plans)
+        </p>
+      </div>
+      </section>
+    </div>
 
+      
 
     
     <!-- Naive Method Prompt -->
