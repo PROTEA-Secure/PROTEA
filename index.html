@@ -157,7 +157,7 @@
         <h2>Overview Figure of PROTEA</h2>
         <p style="text-align: center;">
           <a href="assets/figures/overview.jpg" target="_blank" rel="noopener">
-            <img src="assets/figures/overview.jpg" 
+            <img src="assets/figures/overview.png" 
                  alt="Overview Figure of PROTEA" 
                  style="max-width:100%; border-radius:12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" />
           </a>
@@ -289,107 +289,105 @@
     </div>
 
     <!-- FAILURE ANALYSIS -->
-  <div style="margin-bottom: 40px;">
-    <section id="failure-analysis" class="card">
-      <h2>Failure Analysis</h2>
-  
-      <p>
-        We analyze the failure cases of PROTEA to better understand the limitations of LLM-based safety evaluation.
-        Our analysis focuses on both <b>false negatives</b> (missed detections of harmful plans) and <b>false positives</b>
-        (benign plans incorrectly flagged as malicious). The results reveal that most failures stem from reasoning
-        challenges rather than errors in state tracking.
-      </p>
-  
-      <h3>False Negatives</h3>
-      <p>
-        False negatives occur when PROTEA fails to identify malicious plans. As shown in the figure below, the primary
-        causes include failures in reasoning about object relationships and long-term consequences of actions.
-      </p>
-  
-      <ul>
-        <li><b>Object Relations Reasoning Failure.</b> The model fails to infer implicit relationships between objects
-        that lead to harmful outcomes (e.g., placing a bowl with a metal spoon into a microwave).</li>
-  
-        <li><b>Value & Consequential Risk.</b> The model fails to recognize the importance of certain objects or
-        long-term consequences of actions (e.g., discarding credit cards or placing sharp objects in unsafe locations).</li>
-  
-        <li><b>Physical & Property Damage Reasoning Failure.</b> The model fails to recognize physical damage caused by
-        an action (e.g., dropping a fragile object on the floor).</li>
-  
-        <li><b>State Update Failure.</b> The model incorrectly updates the environment state after an action,
-        leading to decisions based on incomplete or incorrect information.</li>
-      </ul>
-  
-      <!-- False Negative Figure -->
-      <div style="text-align:center; margin: 20px 0;">
-        <img src="assets/figures/fn_failure_analysis2.png" style="max-width:100%; border-radius:8px;">
-        <p style="font-size:14px; color:gray;">
-          Breakdown of false negatives across models.
+    <div style="margin-bottom: 40px;">
+      <section id="failure-analysis" class="card">
+        <h2>I. FAILURE ANALYSIS AND COST</h2>
+        <p>
+          This section provides a breakdown of the observed failure
+          cases in PROTEA, highlighting the primary causes of missed
+          detections.
         </p>
-      </div>
-  
-      <h3>False Positives</h3>
-      <p>
-        We also analyze false positives to understand why benign plans may be incorrectly flagged as malicious.
-        These failures often occur when the model evaluates actions in isolation or misinterprets the intended
-        meaning of certain commands.
-      </p>
-  
-      <ul>
-        <li><b>Over-cautiousness.</b> Benign actions appear suspicious when evaluated step-by-step
-        (e.g., approaching a trashcan).</li>
-  
-        <li><b>State Update Failure.</b> Incorrect environment state tracking causes safety judgments
-        based on incomplete information.</li>
-  
-        <li><b>Redundant or Wasteful Actions Misclassified.</b> Repeated or inefficient actions are interpreted
-        as harmful even though they introduce no real risk.</li>
-  
-        <li><b>Action Meaning Confusion.</b> The model misunderstands the intended semantics of an action
-        command (e.g., misinterpreting the meaning of <code>PUTBACK</code>).</li>
-      </ul>
-  
-      <!-- False Positive Figure -->
-      <div style="text-align:center; margin: 20px 0;">
-        <img src="assets/figures/fp_failure_analysis2.png" style="max-width:100%; border-radius:8px;">
-        <p style="font-size:14px; color:gray;">
-          Breakdown of false positives across models.
+    
+        <h3>A. Failure Analysis: False Negatives</h3>
+        <p>
+          We analyze false negatives of PROTEA by categorizing
+          the underlying failures in Fig. 9. The primary failure modes
+          are summarized as follows:
         </p>
-      </div>
-  
-    </section>
-  </div>
-  <!-- COST ANALYSIS -->
-  <div style="margin-bottom: 40px;">
-    <section id="cost-analysis" class="card">
-      <h2>Computational Cost</h2>
-  
-      <p>
-        We evaluate the computational overhead introduced by PROTEA using 18 representative task plans.
-        On average, PROTEA requires approximately <b>21.1–26.4 LLM calls per plan</b>, reflecting the
-        detect–update calls executed for each action during step-by-step evaluation.
-        Total token usage ranges between <b>18K and 27K tokens per plan</b>.
-      </p>
-  
-      <p>
-        Plan-level latency varies significantly across models, ranging from approximately
-        <b>25 seconds for GPT-4o-mini</b> to over <b>200 seconds for Grok-3-mini</b>.
-        For API-based models, the monetary cost per plan remains low
-        (e.g., about <b>$0.003 for GPT-4o-mini</b> and <b>$0.0054 for Grok-3-mini</b>).
-        Although PROTEA introduces additional inference overhead due to step-wise evaluation,
-        the cost remains manageable for moderate-length task plans.
-      </p>
-  
-      <!-- Cost Table Figure -->
-      <div style="text-align:center; margin: 20px 0;">
-        <img src="assets/figures/protea_cost_table.png" style="max-width:100%; border-radius:8px;">
-        <p style="font-size:14px; color:gray;">
-          Computational cost of PROTEA (average per plan over 18 plans).
+    
+        <ul>
+          <li>
+            Object Relations Reasoning Failure. The model fails
+            to reason about implicit relationships between objects
+            (e.g., placing a spoon in a bowl, then putting the bowl
+            in the microwave and switching it on), and therefore
+            does not recognize the indirect harmful consequence.
+          </li>
+    
+          <li>
+            Value & Consequential Risk. The model fails to recog-
+            nize the intrinsic importance of certain objects or the
+            future harm created by an action (e.g., discarding credit
+            cards or placing a sharp object on the carpet).
+          </li>
+    
+          <li>
+            Physical & Property Damage Reasoning Failure. The
+            model fails to recognize real-world damage caused by
+            an action (e.g., dropping a glass on the floor).
+          </li>
+    
+          <li>
+            State Update Failures. The model incorrectly updates
+            the world state after executing an action, causing sub-
+            sequent decisions to rely on incomplete or incorrect
+            information about object states or locations
+          </li>
+        </ul>
+    
+        <p>
+          Overall, most false negatives stem from failures in reason-
+          ing about object relationships and longer-term consequences,
+          rather than incorrect state tracking.
         </p>
-      </div>
-  
-    </section>
-  </div>
+    
+        <div style="text-align:center; margin-top:20px;">
+          <img src="assets/figures/fn_failure_analysis2.png" style="max-width:100%; height:auto;">
+        </div>
+    
+        <h3 style="margin-top:40px;">B. Failure Analysis: False Positives</h3>
+        <p>
+          To better understand the decrease in precision observed
+          under PROTEA, we analyze the false positives in Fig. 10.
+        </p>
+    
+        <ul>
+          <li>
+            Over-cautiousness. The models flagged many benign
+            actions as malicious simply because they appeared
+            suspicious in isolation (e.g., approaching a trashcan).
+          </li>
+    
+          <li>
+            State update failure. The model fails to correctly track
+            object states or relations after an action, leading to
+            safety judgments based on incomplete or inaccurate
+            world state information.
+          </li>
+    
+          <li>
+            Redundant or wasteful actions misclassified. This failure
+            occurs when repeated or inefficient actions are inter-
+            preted as harmful despite introducing no actual risk
+            (e.g., turning a light on after another light was switched
+            off, or discarding clean towels)
+          </li>
+    
+          <li>
+            Action meaning confusion. The model misunderstands
+            the intended function or valid usage of an action com-
+            mand. For example, it may flag [PUTBACK] &ltcup&gt &ltplate&gt as malicious by incorrectly assuming that
+            PUTBACK must return an object to its original location
+            rather than allowing placement on another object
+          </li>
+        </ul>
+    
+        <div style="text-align:center; margin-top:20px;">
+          <img src="assets/figures/fp_failure_analysis2.png" style="max-width:100%; height:auto;">
+        </div>
+    
+      </section>
+    </div>
 
 
     
