@@ -287,7 +287,82 @@
         <p><strong>Difficulty Level:</strong> Hard</p>
       </section>
     </div>
-        
+
+    <!-- FAILURE ANALYSIS -->
+  <div style="margin-bottom: 40px;">
+    <section id="failure-analysis" class="card">
+      <h2>Failure Analysis</h2>
+  
+      <p>
+        We analyze the failure cases of PROTEA to better understand the limitations of LLM-based safety evaluation.
+        Our analysis focuses on both <b>false negatives</b> (missed detections of harmful plans) and <b>false positives</b>
+        (benign plans incorrectly flagged as malicious). The results reveal that most failures stem from reasoning
+        challenges rather than errors in state tracking.
+      </p>
+  
+      <h3>False Negatives</h3>
+      <p>
+        False negatives occur when PROTEA fails to identify malicious plans. As shown in the figure below, the primary
+        causes include failures in reasoning about object relationships and long-term consequences of actions.
+      </p>
+  
+      <ul>
+        <li><b>Object Relations Reasoning Failure.</b> The model fails to infer implicit relationships between objects
+        that lead to harmful outcomes (e.g., placing a bowl with a metal spoon into a microwave).</li>
+  
+        <li><b>Value & Consequential Risk.</b> The model fails to recognize the importance of certain objects or
+        long-term consequences of actions (e.g., discarding credit cards or placing sharp objects in unsafe locations).</li>
+  
+        <li><b>Physical & Property Damage Reasoning Failure.</b> The model fails to recognize physical damage caused by
+        an action (e.g., dropping a fragile object on the floor).</li>
+  
+        <li><b>State Update Failure.</b> The model incorrectly updates the environment state after an action,
+        leading to decisions based on incomplete or incorrect information.</li>
+      </ul>
+  
+      <!-- False Negative Figure -->
+      <div style="text-align:center; margin: 20px 0;">
+        <img src="assets/figures/fn_failure_analysis2.png" style="max-width:100%; border-radius:8px;">
+        <p style="font-size:14px; color:gray;">
+          Breakdown of false negatives across models.
+        </p>
+      </div>
+  
+      <h3>False Positives</h3>
+      <p>
+        We also analyze false positives to understand why benign plans may be incorrectly flagged as malicious.
+        These failures often occur when the model evaluates actions in isolation or misinterprets the intended
+        meaning of certain commands.
+      </p>
+  
+      <ul>
+        <li><b>Over-cautiousness.</b> Benign actions appear suspicious when evaluated step-by-step
+        (e.g., approaching a trashcan).</li>
+  
+        <li><b>State Update Failure.</b> Incorrect environment state tracking causes safety judgments
+        based on incomplete information.</li>
+  
+        <li><b>Redundant or Wasteful Actions Misclassified.</b> Repeated or inefficient actions are interpreted
+        as harmful even though they introduce no real risk.</li>
+  
+        <li><b>Action Meaning Confusion.</b> The model misunderstands the intended semantics of an action
+        command (e.g., misinterpreting the meaning of <code>PUTBACK</code>).</li>
+      </ul>
+  
+      <!-- False Positive Figure -->
+      <div style="text-align:center; margin: 20px 0;">
+        <img src="assets/figures/fp_failure_analysis2.png" style="max-width:100%; border-radius:8px;">
+        <p style="font-size:14px; color:gray;">
+          Breakdown of false positives across models.
+        </p>
+      </div>
+  
+    </section>
+  </div>
+
+
+
+    
     <!-- Naive Method Prompt -->
     <div style="margin-bottom: 40px;">
     <section class="card">      
@@ -621,7 +696,7 @@
       Here is the action that you should execute:
               [WALK] &ltsink&gt (231)
 
-    Remember to preserve all objects and structure, only change the relevant states or locations, include every updated object in the form: <object_name> (id: <number>): <description>. Do not omit unchanged objects. Respond only with the updated environment description.
+    Remember to preserve all objects and structure, only change the relevant states or locations, include every updated object in the form: &ltobject_name&gt (id: &ltnumber&gt): &ltdescription&gt.
 
     Updated state:
           
