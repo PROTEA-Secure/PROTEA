@@ -89,7 +89,23 @@
     .kpi .l{color:var(--muted); font-size:12px}
 
     .code{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:var(--panel-2); border:1px dashed color-mix(in oklab, var(--panel-2), #fff 12%); padding:14px; border-radius:12px; overflow:auto}
-
+    .hero-btn {
+      background-color: #eef3fb;
+      color: #1a2a3a;
+      border: 1px solid #cfd8e6;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    
+    .hero-btn:hover {
+      background-color: #dfe8f6;
+      border-color: #9fb4d9;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+    }
     footer{padding:38px 0 60px; color:var(--muted)}
   </style>
 </head>
@@ -105,9 +121,9 @@
     <p class="subtitle"></p>
     <div class="cta">
       <!-- <a class="btn primary" href="#" onclick="comingSoon(event)">Archive</a> -->
-      <a class="btn ghost" href="https://github.com/PROTEA-Secure/defense_protea.git" target="_blank">Code</a>
-      <a class="btn ghost" href="https://github.com/PROTEA-Secure/PROTEA/releases/tag/V1.0" target="_blank">Dataset</a>
-      <a class="btn ghost" href="assets/figures/appendix.pdf" target="_blank" rel="noopener">Appendix</a>
+      <a class="btn ghost hero-btn" href="https://github.com/PROTEA-Secure/defense_protea.git" target="_blank">Code</a>
+      <a class="btn ghost hero-btn" href="https://github.com/PROTEA-Secure/PROTEA/releases/tag/V1.0" target="_blank">Dataset</a>
+      <a class="btn ghost hero-btn" href="assets/figures/appendix.pdf" target="_blank" rel="noopener">Appendix</a>
     </div>
     
     <script>
