@@ -106,6 +106,17 @@
       transform: translateY(-1px);
       box-shadow: 0 3px 6px rgba(0,0,0,0.12);
     }
+
+    .tag {
+      display: inline-block;
+      background: #eef3fb;
+      border: 1px solid #cfd8e6;
+      padding: 4px 10px;
+      margin: 4px 6px 0 0;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    
     footer{padding:38px 0 60px; color:var(--muted)}
   </style>
 </head>
@@ -187,6 +198,19 @@
         represent relations between objects. These plans can be executed in the VirtualHome simulator within their respective environments. As such, VirtualHome serves
         as a reliable foundation for our work, offering realistic and executable household task plans from which we construct harmful variants.
       </p>
+
+      <div style="margin-top:10px;">
+        <strong>Harm Categories (6):</strong>
+        <div style="margin-top:6px;">
+          <span class="tag">Electrical Hazard</span>
+          <span class="tag">Fire Hazard</span>
+          <span class="tag">Property Damage</span>
+          <span class="tag">Animal Harm</span>
+          <span class="tag">Important Items Loss</span>
+          <span class="tag">Poisoning / Contamination</span>
+        </div>
+      </div>
+
       
       <div class="kpis" style="margin-top:12px">
         <div class="kpi"><div class="n">1,438</div><div class="l">Total plans (Benign and Malciious) </div></div>
